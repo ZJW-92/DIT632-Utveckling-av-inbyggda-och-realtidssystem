@@ -1,0 +1,6 @@
+## Introduction
+Embedded and real-time software is often closely interacting with hardware. Typically, this software is written in a language like C on either a real-time operating system or a stripped Unix/Linux version. The course contains an introduction to general operating systems and real-time operating systems, an introduction to programming for an embedded environment and tools used to develop embedded systems. New concepts, mainly, used in the real-time and embedded systems will be introduced.
+
+## Exercises and assignments for the course DIT632 Development of Embedded Systems 
+The aim for this course is to give you an overall introduction in developing of software for embedded and real-time systems. One way of getting this knowledge is to develop different programs intended for such systems.  Today the most common language for embedded systems is still C or C++. One reason for this is because C is “closer” to the assembly language than other language, i.e.  a C-program generates less assembly instruction then other high level program languages and by that needs   less of memory.  Another advantage is that it’s  easier to write program segments including interaction with hardware and I/O modules
+
