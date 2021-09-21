@@ -1,0 +1,43 @@
+/* ====================================
+File name: exerc_6_1.c (or cpp)
+Date: 2021-03-04
+Group nr 31
+Members that contribute to the solutions
+Zhijie Wei
+Member not present at demonstration time:
+Karim Abdeldayem
+Demonstration code: MAS7-HD6U-HSQN-CTWS
+====================================== */
+1. How many threads (in total) are created during the execution of the program?
+
+Two threads are created during the execution of the program, the first one is main, the second on is is created through pthread. 
+
+2. What are lines 16, 17, 20, 25 and 26 intended for?
+
+Line 16 - Declare a variable called tid of type pthread_t, which is intended
+for the use of pthread_create to create a new thread and tid will be the name 
+or id of the thread.
+Line 17 - Declare a variable called attr  of type pthread_attr_t, which is intended
+for the use of pthread_create to create a new thread and attr will be the 
+attributes in the thread.
+Line 20 - pthread_attr_init(&attr) allows initializing a thread attribute object. 
+Line 25 - Create a new thread, with attributes specified by attr. And the thread is 
+created executing runner with NULL as its argument.
+Line 26 - Suspend execution of the calling thread did until the thread tid terminates, 
+unless the thread tid has already terminated.
+
+
+3. How many parameters are passed to function runner?
+
+There is only one parameter NULL that is passed to the function runner through the last argument in pthread_create(&tid, &attr, runner, NULL).
+
+4. How can function runner know the values for parameters that, such as max value, not are
+passed to it?
+
+max_value is declared globally and in the main it is assigned a value according to the input  and then the thread is created so the values can be passed to function runner.
+
+5. Test how the behavior of the program changes if line 26 is omitted. Explain why.
+
+If line 26 is omitted the array won't be completely sorted. 
+Because the 'main' thread does not wait for the 'tid' thread to finish.
+ 
