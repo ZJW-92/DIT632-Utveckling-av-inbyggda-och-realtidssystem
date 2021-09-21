@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "5d4f4c96-e048-46bc-b230-7eee8740cf74",
+		"name": "testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create en employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "67fdf859-abc8-4f50-8a30-1e4bf2bf1c8e",
+						"exec": [
+							"var json = pm.response.json();",
+							"postman.setEnvironmentVariable(\"user_id\", json.data.id);",
+							" ",
+							"pm.test('check correct status code', function() {",
+							"    pm.response.to.have.status(201)",
+							"})",
+							"pm.test('check JSON response not empty', function(){",
+							"    pm.expect(json).to.not.null;",
+							"    pm.expect(json.length).to.not.eq(0);",
+							"})",
+							" ",
+							"pm.test('check data to be equal to what was set', function() {",
+							"    pm.expect(json.data.employee_name).to.eq(\"Peter Parker\")",
+							"    pm.expect(json.data.employeesalary).to.eq('6363')",
+							"    pm.expect(json.data.employee_age).to.eq(\"23\")",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"employee_id\" :\"001\",\n \"employee_name\" :\"Peter Parker\",\n \"employee_salary\" : \" 6363\", \n \"employee_age\" : \"23\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete  an employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "70b4785e-44a8-4d46-868d-1630d67ea63a",
+						"exec": [
+							"var json = pm.response.json();",
+							" ",
+							"pm.test('Expect status code 200', function(){",
+							"    pm.response.to.have.status(200)",
+							"})",
+							" ",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/delete/{{user_id}}",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"delete",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update an employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ad79ed86-cced-4976-8088-ea6736b1c373",
+						"exec": [
+							"var json = pm.response.json();",
+							" ",
+							"pm.test('Check id', function(){",
+							"    pm.expect(json.data.id).to.eq(postman.user_id)",
+							"})",
+							" ",
+							"pm.test('Expect name to only allow for string value', function() {",
+							"    if(pm.response.to.have.status(200)){",
+							"        pm.expect(json.data.employee_name).to.not.be.a('number')",
+							"    }",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"employee_id\": \"002\"\n \"employee_name\" :\"Linda\",\n \"employee_salary\" : \" 20000\", \n \"employee_age\" : \"19\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/update/{{user_id}}",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"update",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all employee data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f7755f54-feee-4bc2-af42-9a04717e1062",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employees",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get one employee data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete an employee, 90% response within 1 second",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ed2b5c06-eceb-4c50-a5ac-accd3533d5aa",
+						"exec": [
+							"pm.test('response is created',function() {",
+							"pm.expect(pm.response.code).to.be(200);",
+							"})",
+							"pm.test('response should have a valid JSON data',function(){",
+							"    var jsonData= pm.response.json();",
+							"    pm.expect(jsonData.message).eql('Record has deleted successfully!');",
+							"    pm.expect(jsonData.data).eql('user_id');",
+							"    pm.expect(jsonData.status).eql('success')",
+							"})",
+							"pm.test('check correct status code', function() {",
+							"    pm.response.to.have.status(201)",
+							"})",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/delete/{{user_id}}",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"delete",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
